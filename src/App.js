@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useCallback } from 'react'
+import './App.css'
+import Forms from './Components/Froms'
 
 function App() {
+  const [form, setForm] = useState([1])
+  const addForm = useCallback(() => {
+    setForm(form => [...form, form.length + 1])
+  }, [form])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      {form?.map(el => {
+        return <Forms id={el} />
+      })}
+      <hr />{' '}
+      <button
+        className='btn btn-primary rounded-pill position-relative'
+        style={{ marginTop: '-6%' }}
+        onClick={addForm}>
+        +
+      </button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
